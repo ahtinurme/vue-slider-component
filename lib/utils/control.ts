@@ -547,7 +547,7 @@ export default class Control {
     const dotsPos = this.dotsPos
     const valuePosRange: Array<[number, number]> = []
 
-    dotsPos.forEach((pos, i) => {
+    dotsPos.forEach((_, i) => {
       valuePosRange.push([
         Math.max(
           this.minRange ? this.minRangeDir * i : 0,
