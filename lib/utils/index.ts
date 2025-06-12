@@ -47,15 +47,24 @@ export const getPos = (
 
 function getKeyFromKeyCode(keyCode: number): string | null {
   switch (keyCode) {
-    case 33: return 'PageUp'
-    case 34: return 'PageDown'
-    case 35: return 'End'
-    case 36: return 'Home'
-    case 37: return 'ArrowLeft'
-    case 38: return 'ArrowUp'
-    case 39: return 'ArrowRight'
-    case 40: return 'ArrowDown'
-    default: return null
+    case 33:
+      return 'PageUp'
+    case 34:
+      return 'PageDown'
+    case 35:
+      return 'End'
+    case 36:
+      return 'Home'
+    case 37:
+      return 'ArrowLeft'
+    case 38:
+      return 'ArrowUp'
+    case 39:
+      return 'ArrowRight'
+    case 40:
+      return 'ArrowDown'
+    default:
+      return null
   }
 }
 export type HandleFunction = (index: number) => number
