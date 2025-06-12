@@ -45,15 +45,18 @@ export const getPos = (
   }
 }
 
-const enum KEY_CODE {
-  PAGE_UP = 33,
-  PAGE_DOWN,
-  END,
-  HOME,
-  LEFT,
-  UP,
-  RIGHT,
-  DOWN,
+function getKeyFromKeyCode(keyCode: number): string | null {
+  switch (keyCode) {
+    case 33: return 'PageUp'
+    case 34: return 'PageDown'
+    case 35: return 'End'
+    case 36: return 'Home'
+    case 37: return 'ArrowLeft'
+    case 38: return 'ArrowUp'
+    case 39: return 'ArrowRight'
+    case 40: return 'ArrowDown'
+    default: return null
+  }
 }
 export type HandleFunction = (index: number) => number
 export const getKeyboardHandleFunc = (
@@ -70,24 +73,28 @@ export const getKeyboardHandleFunc = (
     if (typeof result === 'function') return result
     if (!result) return null
   }
-  switch (e.keyCode) {
-    case KEY_CODE.UP:
+
+  // Use e.key if available (modern browsers), fallback to e.keyCode for older browsers
+  const key = e.key || (e.keyCode && getKeyFromKeyCode(e.keyCode))
+
+  switch (key) {
+    case 'ArrowUp':
       return (i) => (params.direction === 'ttb' ? i - 1 : i + 1)
-    case KEY_CODE.RIGHT:
+    case 'ArrowRight':
       return (i) => (params.direction === 'rtl' ? i - 1 : i + 1)
-    case KEY_CODE.DOWN:
+    case 'ArrowDown':
       return (i) => (params.direction === 'ttb' ? i + 1 : i - 1)
-    case KEY_CODE.LEFT:
+    case 'ArrowLeft':
       return (i) => (params.direction === 'rtl' ? i + 1 : i - 1)
 
-    case KEY_CODE.END:
+    case 'End':
       return () => params.max
-    case KEY_CODE.HOME:
+    case 'Home':
       return () => params.min
 
-    case KEY_CODE.PAGE_UP:
+    case 'PageUp':
       return (i) => i + 10
-    case KEY_CODE.PAGE_DOWN:
+    case 'PageDown':
       return (i) => i - 10
 
     default:
